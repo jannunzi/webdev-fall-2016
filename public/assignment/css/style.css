@@ -2,6 +2,11 @@ input.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-header {
+    width:100%;
+}
+
 body {
     padding-top: 36px;
+    padding-bottom: 56px;
 }

@@ -1,0 +1,12 @@
+.navbar.navbar-fixed-bottom .row.navbar-text {
+    width: 100%;
+    margin-left: 0px;
+}
+
+.navbar.navbar-fixed-bottom .row.navbar-text a {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}

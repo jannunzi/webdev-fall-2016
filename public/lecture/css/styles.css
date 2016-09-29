@@ -1,0 +1,23 @@
+body {
+    padding-top: 65px;
+}
+
+.navbar-default.jga-profile {
+    background-color: #3d96bd;
+}
+
+.navbar-default.jga-profile-b {
+    background-color: red;
+}
+
+.navbar-default.jga-profile .navbar-brand {
+    color: white;
+}
+
+.navbar-default.jga-profile-b .navbar-brand {
+    color: yellow;
+}
+
+.glyphicon {
+    color: white;
+}
