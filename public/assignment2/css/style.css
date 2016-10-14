@@ -1,0 +1,28 @@
+.navbar-default .navbar-brand,
+.navbar-text a span
+{
+    color: white;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+input.form-control {
+    margin-bottom: 5px;
+}
+
+/*
+.navbar-header {
+    width:100%;
+}
+*/
+
+body {
+    padding-top: 60px;
+    padding-bottom: 56px;
+}
+
+.navbar-default {
+    background-color: #428bca;
+}

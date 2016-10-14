@@ -10,21 +10,17 @@
             })
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+                controller: "LoginController"
             })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html"
             })
-            .when("/user/:uid", {
-                templateUrl: "views/user/profile.view.client.html",
-                controller: "ProfileController",
-                controllerAs: "model"
+            .when("/profile", {
+                templateUrl: "views/user/profile.view.client.html"
             })
-            .when("/user/:uid/website", {
+            .when("/website", {
                 templateUrl: "views/website/website-list.html",
-                controller: "WebsiteListController",
-                controllerAs: "model"
+                controller: "WebsiteListController"
             })
             .when("/website/new", {
                 templateUrl: "views/website/website-new.html"
