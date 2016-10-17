@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SceIframeExample">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="iframe.js"></script>
+    <meta charset="UTF-8">
+    <title>SCE</title>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="YouTubeController as model">
+        <h1>Strict Contextual Escaping</h1>
+
+        <h2>iFrame</h2>
+        {{model.urls}}
+        <ul>
+            <li ng-repeat="url in model.urls">{{url.url}}</li>
+        </ul>
+
+        <iframe ng-repeat="url in model.urls" width="560" height="315" src="{{model.safeUrl(url.url)}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</body>
+</html>

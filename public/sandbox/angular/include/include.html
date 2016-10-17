@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="IncludeExampleApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="include.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="IncludeController as model">
+        {{model.widgets}}
+
+        <div ng-include="'youtube.html'"></div>
+
+        <div ng-switch="widget.type"
+             ng-repeat="widget in model.widgets">
+            <div ng-switch-when="YOUTUBE">
+                <div ng-include="'youtube.html'"></div>
+            </div>
+            <div ng-switch-when="HEADING">
+                <div ng-include="'heading.html'"></div>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <div ng-include="'image.html'"></div>
+            </div>
+        </div>
+
+        <div ng-repeat="widget in model.widgets">
+            <div ng-include="'widget-'+widget.type+'.html'"></div>
+        </div>
+
+    </div>
+</body>
+</html>

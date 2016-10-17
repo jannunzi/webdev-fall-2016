@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="EmbeddedHtmExample">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="html.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="HtmlController as model">
+        <h1>Embedded HTML</h1>
+
+        {{model.htmls}}
+
+        <div ng-repeat="html in model.htmls" ng-bind-html="model.safeHtml(html.html)">
+        </div>
+
+        <!--<div>-->
+            <!--<h2>Header 123</h2>-->
+
+            <!--<p>-->
+                <!--Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.-->
+            <!--</p>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<h2>Header abc</h2>-->
+
+            <!--<p>-->
+                <!--It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.-->
+            <!--</p>-->
+        <!--</div>-->
+
+    </div>
+</body>
+</html>
