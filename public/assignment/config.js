@@ -29,8 +29,20 @@
             .when("/website/new", {
                 templateUrl: "views/website/website-new.html"
             })
-            .when("/website/:wid", {
-                templateUrl: "views/website/website-edit.html"
+            .when("/user/:uid/website/:wid", {
+                templateUrl: "views/website/website-edit.html",
+                controller: "WebsiteEditController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget", {
+                templateUrl: "views/widget/widget-list.html",
+                controller: "WidgetListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
+                templateUrl: "views/widget/widget-edit.view.client.html",
+                controller: "WidgetEditController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

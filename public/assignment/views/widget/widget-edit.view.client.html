@@ -8,7 +8,7 @@
                 </div>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        Websites
+                        Edit Widget
                     </a>
                 </div>
                 <div class="navbar-text pull-right" style="margin-right: 27px;">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        Edit Website
+                        Edit Widget
                     </a>
                 </div>
             </div>
@@ -230,17 +230,8 @@
         </div>
         <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
             <form>
-                {{model.website}}
-
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input ng-model="model.website.name"
-                           type="text"
-                           class="form-control"
-                           id="name"
-                           placeholder="Name">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                {{model.widget}}
+                <div ng-include="'views/widget/widget-'+model.widget.widgetType+'-editor.html'"></div>
             </form>
         </div>
     </div>
