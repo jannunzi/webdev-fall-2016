@@ -24,7 +24,7 @@
                     </a>
                 </div>
                 <div class="navbar-text pull-right" style="margin-right: 0px;">
-                    <a href="#">
+                    <a ng-click="model.createWebsite(website)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -40,9 +40,9 @@
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs" style="margin-left:15px; margin-top: 50px; padding-top: 15px; margin-bottom: 50px; position: absolute;top: 0px;bottom: 0px;overflow: auto;">
             <ul class="list-group">
-                <li class="list-group-item">
+                <li ng-repeat="website in model.websites" class="list-group-item">
                     <a href="#">
-                        Cras justo odio
+                        {{website.name}}
                     </a>
                     <a href="#" class="pull-right" style="margin-left: 15px;">
                         <span class="glyphicon glyphicon-cog"></span>
@@ -51,204 +51,18 @@
                         <span class="glyphicon glyphicon-play"></span>
                     </a>
                 </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Dapibus ac facilisis in
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Morbi leo risus
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Porta ac consectetur ac
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Vestibulum at eros
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#">
-                        Porta ac consectetur ac
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Vestibulum at eros
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#">
-                        Porta ac consectetur ac
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Vestibulum at eros
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#">
-                        Porta ac consectetur ac
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Vestibulum at eros
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        Cras justo odio
-                    </a>
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                    <a href="#" class="pull-right">
-                        <span class="glyphicon glyphicon-play"></span>
-                    </a>
-                </li>
-
             </ul>
         </div>
         <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
             <form>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="name">Name</label>
+                    <input ng-model="website.name" type="text" class="form-control" id="name" placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="description">Description</label>
+                    <textarea ng-model="website.description" placeholder="Description" class="form-control" id="description"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <input type="file" id="exampleInputFile" class="form-control">
-                </div>
-                <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" aria-label="...">
-                      </span>
-                    <input value="Single" readonly type="text" class="form-control" aria-label="...">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         </div>
     </div>

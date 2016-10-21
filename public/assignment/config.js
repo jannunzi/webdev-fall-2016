@@ -26,8 +26,10 @@
                 controller: "WebsiteListController",
                 controllerAs: "model"
             })
-            .when("/website/new", {
-                templateUrl: "views/website/website-new.html"
+            .when("/user/:uid/website/new", {
+                templateUrl: "views/website/website-new.html",
+                controller: "WebsiteNewController",
+                controllerAs: "model"
             })
             .when("/user/:uid/website/:wid", {
                 templateUrl: "views/website/website-edit.html",

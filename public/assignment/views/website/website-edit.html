@@ -24,7 +24,7 @@
                     </a>
                 </div>
                 <div class="navbar-text pull-right" style="margin-right: 0px;">
-                    <a href="#">
+                    <a ng-click="model.updateWebsite(model.website)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -240,7 +240,8 @@
                            id="name"
                            placeholder="Name">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <a ng-click="model.removeWebsite(model.website._id)"
+                   class="btn btn-danger btn-block">Delete</a>
             </form>
         </div>
     </div>
