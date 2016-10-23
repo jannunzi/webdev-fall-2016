@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../../js/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var lines = [
+            {x1: 100, y1:100, x2:150, y2:300, width:6, color:"blue"},
+            {x1: 100, y1:100, x2:200, y2:250, width:2, color:"red"},
+            {x1: 100, y1:100, x2:250, y2:200, width:4, color:"green"},
+            {x1: 100, y1:100, x2:250, y2:120, width:4, color:"purple"}
+        ];
+        $(function(){
+            var canvas = $(".canvas");
+            for(var l in lines) {
+                var lineObj = lines[l];
+                //x2y2+   |   +x2y2
+                //    ----+----x1y1
+                //x2y2+   |   +x2y2
+                if(lineObj.x1 > lineObj.x2) {
+                    var tmp = lineObj.x1;
+                    lineObj.x1 = lineObj.x2;
+                    lineObj.x2 = tmp;
+                    tmp = lineObj.y1;
+                    lineObj.y1 = lineObj.y2;
+                    lineObj.y2 = tmp;
+                }
+                // |   +x2y2
+                //-+----x1y1
+                // |   +x2y2
+                var width  = Math.abs(lineObj.x2 - lineObj.x1);
+                var height = Math.abs(lineObj.y2 - lineObj.y1);
+                var top = lineObj.y1 < lineObj.y2 ? lineObj.y1 : lineObj.y2;
+                var left = lineObj.x1;
+                var svg = $("<svg>")
+                        .attr("width",  width +"px")
+                        .attr("height", height+"px")
+                        .css({
+                            "position": "absolute",
+                            "top":  top+"px",
+                            "left": left+"px",
+                        });
+                var lineSvg = $("<line>")
+                        .attr("x1", "0")
+                        .attr("y1", "0")
+                        .attr("x2", Math.abs(lineObj.x2 - lineObj.x1))
+                        .attr("y2", Math.abs(lineObj.y2 - lineObj.y1))
+                        .css({
+                            "stroke": lineObj.color,
+                            "stroke-width": lineObj.width
+                        });
+                svg.append(lineSvg);
+                canvas.append(svg);
+            }
+            $(".canvas").html($(".canvas").html());
+        });
+    </script>
+</head>
+<body>
+<div class="canvas"></div>
+</body>
+</html>

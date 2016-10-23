@@ -7,13 +7,21 @@
     <script src="../../../js/jquery-ui.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        h3 {
+            border: 2px gray solid;
+            border-radius: 5px;
+            white-space:nowrap;
+            padding:5px;
+        }
+    </style>
     <script>
         $(function () {
             var diagram = [];
             var canvas = $(".canvas");
-            var pageHtml = "<h3 class='node'>Page</h3>";
-            var actionHtml = "<h3 class='node'>Action</h3>";
-            var conditionalHtml = "<h3 class='node'>Conditional</h3>";
+            var pageHtml = "<h3 class='node'>Tool 1</h3>";
+            var actionHtml = "<h3 class='node'>Tool 2</h3>";
+            var conditionalHtml = "<h3 class='node'>Tool 3</h3>";
             $(".tool").draggable({
                 helper: "clone"
             });
@@ -75,16 +83,20 @@
     </script>
 </head>
 <body>
-    <div class="container-fluid" style="position: absolute; bottom: 0px; top:0px; right: 0px; left: 0px;">
+    <div class="container-fluid"
+         style="position: absolute; bottom: 0px; top:0px; right: 0px; left: 0px;">
         <h1>Drag and Drop Tools Onto Canvas</h1>
-        <div class="row" style="position: relative; height: 100%;">
-            <div class="col-xs-3" style="position:absolute; top:0px; left:0px; bottom: 0px;z-index: 2; background-color: #9acfea">
+        <div class="row"
+             style="position: relative; height: 100%;">
+            <div class="col-xs-3"
+                 style="position:absolute; top:0px; left:0px; bottom: 0px;z-index: 2; background-color: #9acfea">
                 <h2>Tools</h2>
-                <h3 class="tool page">Page</h3>
-                <h3 class="tool action">Action</h3>
-                <h3 class="tool conditional">Conditional</h3>
+                <h3 class="tool page">Tool 1</h3>
+                <h3 class="tool action">Tool 2</h3>
+                <h3 class="tool conditional">Tool 3</h3>
             </div>
-            <div class="canvas col-xs-9" style="overflow: hidden;position:absolute; bottom: 0px; top: 0px; right: 0px;background-color: beige">
+            <div class="canvas col-xs-9"
+                 style="overflow: hidden;position:absolute; bottom: 0px; top: 0px; right: 0px;background-color: beige">
                 <h2>Canvas</h2>
             </div>
         </div>
