@@ -15,6 +15,8 @@
 
         function init() {
             vm.widgets = WidgetService.findWidgetsForPage(vm.pid);
+            var allWidgets = $(".wam-widget");
+            alert(allWidgets.length);
         }
         init();
 

@@ -35,8 +35,10 @@
             }
         }
 
-        function createWebsite(website) {
-            websites.push(website);
+        function createWebsite(uid, website) {
+            // websites.push(website);
+            var url = "/api/user/"+uid+"/website";
+            return $http.post(url, website);
         }
 
         function findWebsiteById(wid) {
@@ -49,14 +51,8 @@
         }
 
         function findWebsitesForUser(uid) {
-            // var result = [];
-            // for(var w in websites) {
-            //     if(websites[w].uid === uid) {
-            //         result.push(websites[w]);
-            //     }
-            // }
-            // return result;
-            $http.get("/websites");
+            var url = "/api/user/"+uid+"/website";
+            return $http.get(url);
         }
     }
 })();

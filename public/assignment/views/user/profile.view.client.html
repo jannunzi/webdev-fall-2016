@@ -2,10 +2,10 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                Fixed Top
+                Profile
             </a>
             <p class="navbar-text pull-right">
-                <a href="#" class="navbar-link">
+                <a ng-click="model.updateUser()" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -41,6 +41,8 @@
        href="#/user/{{model.user._id}}/website">Websites</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Logout</a>
+    <a class="btn btn-warning btn-block"
+       ng-click="model.unregisterUser()">Unregister</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

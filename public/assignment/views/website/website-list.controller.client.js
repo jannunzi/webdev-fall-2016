@@ -9,7 +9,11 @@
         vm.userId = parseInt($routeParams['uid']);
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesForUser(vm.userId);
+            var promise = WebsiteService.findWebsitesForUser(vm.userId);
+            promise
+                .success(function(websites){
+                    vm.websites = websites;
+                });
         }
         init();
     }

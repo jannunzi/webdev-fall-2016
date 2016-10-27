@@ -54,7 +54,7 @@
             </ul>
         </div>
         <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
-            <div ng-switch="widget.widgetType"
+            <div ng-switch="widget.widgetType" class="wam-widget"
                  ng-repeat="widget in model.widgets">
                 <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}" class="pull-right">
                     <span class="glyphicon glyphicon-cog"></span>

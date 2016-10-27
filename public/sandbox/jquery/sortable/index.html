@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../../../css/jquery-ui.css" rel="stylesheet"/>
+    <link href="../../../css/bootstrap.css" rel="stylesheet"/>
+    <script src="../../../js/jquery.js"></script>
+    <script src="../../../js/jquery-ui.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h3 {
+            border: 2px gray solid;
+            border-radius: 5px;
+            white-space:nowrap;
+            padding:5px;
+        }
+    </style>
+    <script>
+        $(function () {
+            var page = [];
+            var canvas = $(".wam-page");
+            var pageHtml = "<h3 class='wam-node'>Tool 1</h3>";
+            var actionHtml = "<h3 class='wam-node'>Tool 2</h3>";
+            var conditionalHtml = "<h3 class='wam-node'>Tool 3</h3>";
+            $(".wam-tool").draggable({
+                helper: "clone"
+            });
+            canvas.droppable({
+                drop: function (event, ui) {
+                    var helper = $(ui.helper);
+                    var position = helper.position();
+                    position.left -= canvas.position().left;
+                    var node = {
+                        position: position,
+                        _id: (new Date()).getTime()
+                    };
+                    if (helper.hasClass('wam-row')) {
+                        node.type = 'ROW';
+                    } else if (helper.hasClass('wam-column')) {
+                        node.type = 'COLUMN';
+                    } else if (helper.hasClass('wam-header')) {
+                        node.type = 'HEADER';
+                    } else if (helper.hasClass('wam-footer')) {
+                        node.type = 'FOOTER';
+                    } else {
+                        return;
+                    }
+                    page.push(node);
+                    $("textarea.debug").html(JSON.stringify(page));
+//                    renderPage(page);
+                }
+            });
+            function renderDiagram(page) {
+                canvas.empty();
+                for(var d in page) {
+                    var node = page[d];
+                    var newNode = {};
+                    if(node.type === 'PAGE') {
+                        newNode = $(pageHtml);
+                    } else if(node.type === 'ACTION') {
+                        newNode = $(actionHtml);
+                    } else if(node.type === 'CONDITIONAL') {
+                        newNode = $(conditionalHtml);
+                    }
+                    newNode.css({
+                        "position": "absolute",
+                        "top": node.position.top,
+                        "left": node.position.left,
+                    }).draggable({
+                        containment: "parent",
+                        stop: function(event, ui){
+                            var id = ui.helper.attr("id");
+                            for(var d in page) {
+                                var node = page[d];
+                                if(node._id == id) {
+                                    node.position.left = ui.position.left;
+                                    node.position.top = ui.position.top;
+                                }
+                            }
+                        }
+                    }).attr("id", node._id);
+                    canvas.append(newNode);
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid"
+         style="position: absolute; bottom: 0px; top:0px; right: 0px; left: 0px;">
+        <h1>Drag and Drop Tools Onto Canvas</h1>
+        <div class="row"
+             style="position: relative; height: 100%;">
+            <div class="col-xs-3"
+                 style="position:absolute; top:0px; left:0px; bottom: 0px;z-index: 2; background-color: #9acfea">
+                <h2>Tools</h2>
+                <h3 class="wam-tool wam-row">Row</h3>
+                <h3 class="wam-tool wam-column">Column</h3>
+                <h3 class="wam-tool wam-header">Header</h3>
+                <h3 class="wam-tool wam-footer">Footer</h3>
+                <textarea style="width:100%;" rows="10"></textarea>
+            </div>
+            <div class="wam-page col-xs-9"
+                 style="overflow: hidden;position:absolute; bottom: 0px; top: 0px; right: 0px;background-color: beige">
+                <h2>Drag Widgets onto this Page</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
