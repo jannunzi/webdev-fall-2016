@@ -4,7 +4,7 @@
         .controller("WidgetListController", WidgetListController);
 
     function WidgetListController($routeParams,
-                                  WidgetService, $sce) {
+                                  WidgetService, $sce, $timeout) {
         var vm  = this;
         vm.uid  = $routeParams.uid;
         vm.wid  = $routeParams.wid;
@@ -15,8 +15,11 @@
 
         function init() {
             vm.widgets = WidgetService.findWidgetsForPage(vm.pid);
-            var allWidgets = $(".wam-widget");
-            alert(allWidgets.length);
+            // var widgets = $(".wam-widgets")
+            //     .sortable({
+            //         axis: 'y'
+            //     });
+            // console.log(widgets);
         }
         init();
 

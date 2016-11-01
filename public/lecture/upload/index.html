@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Upload Example</h1>
+
+<form action="/api/example/upload"  method="post" enctype="multipart/form-data">
+    <input  name="myFile"   type="file" class="form-control"/>
+    <input  name="width"    value="50%" style="display: none"/>
+    <input  name="widgetId" value="123"   style="display: none"/>
+    <br/>
+    <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+</form>
+
+</body>
+</html>
