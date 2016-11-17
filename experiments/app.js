@@ -4,7 +4,6 @@ module.exports = function(app) {
 
     app.post ("/api/experiments/upload", upload.single('myFile'), uploadImage);
 
-
     function uploadImage(req, res) {
 
         var widgetId      = req.body.widgetId;

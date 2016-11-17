@@ -15,18 +15,18 @@ module.exports = function(app)
             '@ds053459.mlab.com:53459/jannunzi_test';
     }
 
-    var mongoose = require("mongoose");
+    var mongoose = require("mongoose");  // npm install mongoose --save
     mongoose.connect(connectionString);
 
     var TestSchema = mongoose.Schema({
         message: String
-    });
+    }, {collection: 'messages'});
 
     var TestModel = mongoose.model("TestModel", TestSchema);
 
     function findAllMessages(req, res) {
         TestModel
-            .find()
+            .find() // select * from messages -- where 
             .then(
                 function(tests) {
                     res.json(tests);

@@ -1,0 +1,143 @@
+<link href="../../css/bootstrap.css" rel="stylesheet"/>
+<style>
+    .absolute {
+    }
+</style>
+<script src="../../js/jquery.js"></script>
+<script>
+    $(init);
+    
+    function init() {
+        $("input")
+            .focusin(focusIn)
+            .focusout(focusOut);
+    }
+
+    var element = null;
+    function focusIn(event) {
+        event.stopPropagation();
+        element = $(this);
+//        element.addClass("absolute");
+//        console.log(element.position());
+//        console.log([window.scrollX, window.scrollY]);
+
+
+        var x = window.scrollX, y = window.scrollY;
+//        element.focus();
+        var pos = element.offset();
+        console.log(element.offset());
+        window.scrollTo(0, pos.top - 40);
+        element.attr("value", y);
+    }
+    
+    function focusOut(event) {
+        if(element) {
+            element.removeClass("absolute");
+        }
+//        console.log("focusOut");
+//        console.log(event);
+    }
+</script>
+<div class="container-fluid">
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">AAA 123</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">AAA 234</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+</form>
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">BBB 123</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">BBB 234</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+</form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">CCC 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">CCC 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">DDD 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">DDD 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">EEE 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">EEE 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">FFF 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">FFF 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">GGG 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">GGG 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">HHH 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">HHH 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">III 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">III 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">JJJ 123</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">JJJ 234</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    </form>
+
+</div>

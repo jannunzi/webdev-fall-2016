@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <h1>
+        <a href="#/search/{{model.title}}">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        {{model.movie.Title}}
+    </h1>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div>
+                Directed by: {{model.movie.Director}}
+            </div>
+            <div>
+                Rated: {{model.movie.Rated}}
+            </div>
+            <div>
+                Released: {{model.movie.Released}}
+            </div>
+            <div>
+                Plot: {{model.movie.Plot}}
+            </div>
+            <div>
+                Actors:
+                <ul>
+                    <li ng-repeat="actor in model.movie.Actors.split(',')">
+                        {{actor}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <img ng-src="{{model.movie.Poster}}" height="300px"/>
+        </div>
+    </div>
+
+    {{model.movie}}
+</div>

@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, model) {
     var websites = [
         {_id: 321, name: 'facebook.com', uid: 123},
         {_id: 432, name: 'wikipedia.org', uid: 123},
@@ -9,20 +9,23 @@ module.exports = function(app) {
     app.post("/api/user/:userId/website", createWebsite);
 
     function createWebsite(req, res) {
-        var website = req.body;
-        websites.push(website);
-        res.send(websites);
+        var website = {name: 'facebook'};
+        // websites.push(website);
+        // res.send(websites);
+        model.websiteModel
+            .createWebsite(req.params.userId, website)
+            .then(function (website) {
+                console.log(website);
+                res.json(website);
+            });
     }
 
     function findAllWebsitesForUser(req, res) {
-        var uid = req.params.userId;
-        var result = [];
-        for(var w in websites) {
-            if(websites[w].uid == uid) {
-                result.push(websites[w]);
-            }
-        }
-        res.json(result);
+        model.websiteModel
+            .findWebsitesForUser(req.params.userId)
+            .then(function(websites){
+                res.json(websites);
+            });
     }
 
 };

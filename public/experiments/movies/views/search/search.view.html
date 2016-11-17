@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <h1>Movie Search</h1>
+    <div class="input-group">
+        <input ng-model="model.title" type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button ng-click="model.searchMovieByTitle(model.title)" class="btn btn-default" type="button">Go!</button>
+            </span>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Poster</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="movie in model.movies">
+            <td><a href="#/details/{{movie.imdbID}}/{{model.title}}">{{movie.Title}}</a></td>
+            <td>{{movie.Year}}</td>
+            <td><img ng-src="{{movie.Poster}}" height="100px"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

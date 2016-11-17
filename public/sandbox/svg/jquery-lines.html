@@ -15,24 +15,41 @@
             var canvas = $(".canvas");
             for(var l in lines) {
                 var lineObj = lines[l];
-                //x2y2+   |   +x2y2
-                //    ----+----x1y1
-                //x2y2+   |   +x2y2
-                if(lineObj.x1 > lineObj.x2) {
-                    var tmp = lineObj.x1;
-                    lineObj.x1 = lineObj.x2;
-                    lineObj.x2 = tmp;
-                    tmp = lineObj.y1;
-                    lineObj.y1 = lineObj.y2;
-                    lineObj.y2 = tmp;
+                //
+                //  x2y2 +   |   + x2y2
+                //           |
+                //           | x1y1
+                //   --------+--------
+                //           |
+                //  x2y2 +   |   + x2y2
+                //
+                var x1 = lineObj.x1;
+                var x2 = lineObj.x2;
+                var y1 = lineObj.y1;
+                var y2 = lineObj.y2;
+                var color = lineObj.color;
+                var width = lineObj.width;
+
+                if(x1 > x2) {
+                    var tmp = x1;
+                    x1 = x2;
+                    x2 = tmp;
+                    tmp = y1;
+                    y1 = y2;
+                    y2 = tmp;
                 }
-                // |   +x2y2
-                //-+----x1y1
-                // |   +x2y2
-                var width  = Math.abs(lineObj.x2 - lineObj.x1);
-                var height = Math.abs(lineObj.y2 - lineObj.y1);
-                var top = lineObj.y1 < lineObj.y2 ? lineObj.y1 : lineObj.y2;
-                var left = lineObj.x1;
+                //
+                //   |   + x2y2
+                //   |              +----
+                //   | x1y1
+                //  -+--------
+                //   |
+                //   |   + x2y2
+                //
+                var width  = Math.abs(x2 - x1);
+                var height = Math.abs(y2 - y1);
+                var top    = y1 < y2 ? y1 : y2;
+                var left   = x1;
                 var svg = $("<svg>")
                         .attr("width",  width +"px")
                         .attr("height", height+"px")
@@ -44,11 +61,11 @@
                 var lineSvg = $("<line>")
                         .attr("x1", "0")
                         .attr("y1", "0")
-                        .attr("x2", Math.abs(lineObj.x2 - lineObj.x1))
-                        .attr("y2", Math.abs(lineObj.y2 - lineObj.y1))
+                        .attr("x2", Math.abs(x2 - x1))
+                        .attr("y2", Math.abs(y2 - y1))
                         .css({
-                            "stroke": lineObj.color,
-                            "stroke-width": lineObj.width
+                            "stroke": color,
+                            "stroke-width": width
                         });
                 svg.append(lineSvg);
                 canvas.append(svg);

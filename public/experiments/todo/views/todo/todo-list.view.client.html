@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <h1>Todo List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody sortable>
+            <tr ng-repeat="todo in model.todos">
+                <td>{{todo._id}}</td>
+                <td>{{todo.title}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

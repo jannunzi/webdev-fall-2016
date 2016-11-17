@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <h1>Todo List</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td colspan="3"><input ng-model="todo.title" class="form-control"/></td>
+            <td><button ng-click="model.createTodo(todo)" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button></td>
+        </tr>
+        </thead>
+        <tbody jga-sortable>
+        <tr ng-repeat="todo in model.todos">
+            <td>{{$index}}</td>
+            <td>{{todo._id}}</td>
+            <td>{{todo.title}}</td>
+            <td><button ng-click="model.deleteTodo(todo._id)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
