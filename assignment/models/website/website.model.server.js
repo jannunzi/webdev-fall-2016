@@ -22,9 +22,9 @@ module.exports = function () {
                 model.userModel
                     .findUserById(userId)
                     .then(function(userObj){
-                        userObj.websites.push(websiteObj);
                         websiteObj._user = userObj._id;
                         websiteObj.save();
+                        userObj.websites.push(websiteObj);
                         return userObj.save();
                     }, function(error){
                         console.log(error);

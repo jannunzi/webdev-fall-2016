@@ -1,4 +1,22 @@
+
 module.exports = function(app, model) {
+
+    var passport      = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var cookieParser  = require('cookie-parser');
+    var session       = require('express-session');
+
+    app.use(session({
+        secret: 'this is the secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+    app.use(cookieParser());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
     var users = [
         {username: 'alice', password: 'ewq', _id: 123, first: 'Alice', last: 'Wonderland'},
@@ -6,12 +24,64 @@ module.exports = function(app, model) {
         {username: 'charlie', password: 'ewq', _id: 345, first: 'Charlie', last: 'Brown'}
     ];
 
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/logout', logout);
+    app.post('/api/checkLogin', checkLogin);
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', unregisterUser);
 
+    
+    function logout(req, res) {
+        req.logout();
+        res.send(200);
+    }
+    
+    function checkLogin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        model.userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function localStrategy(username, password, done) {
+        model
+            .userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function (user) {
+                    if (!user) {
+                        return done(null, false);
+                    }
+                    return done(null, user);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+    
     function unregisterUser(req, res) {
         var uid = req.params.uid;
         model

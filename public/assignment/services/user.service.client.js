@@ -15,9 +15,28 @@
             findUserById: findUserById,
             createUser: createUser,
             updateUser: updateUser,
-            unregisterUser: unregisterUser
+            unregisterUser: unregisterUser,
+            login: login,
+            checkLogin: checkLogin,
+            logout: logout
         };
         return api;
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function checkLogin() {
+            return $http.post("/api/checkLogin");
+        }
+
+        function login(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/login", user);
+        }
 
         function unregisterUser(uid) {
             var url = "/api/user/" + uid;
