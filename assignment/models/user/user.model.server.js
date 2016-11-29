@@ -6,6 +6,7 @@ module.exports = function () {
 
     var api = {
         createUser: createUser,
+        findUserByGoogleId: findUserByGoogleId,
         findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
         findWebsitesForUser: findWebsitesForUser,
@@ -18,6 +19,11 @@ module.exports = function () {
         model = _model;
     }
 
+    function findUserByGoogleId(googleId) {
+        return UserModel
+            .findOne({"google.id": googleId});
+    }
+    
     function findWebsitesForUser(userId) {
         return UserModel
             .findById(userId)

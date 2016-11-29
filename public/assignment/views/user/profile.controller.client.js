@@ -6,7 +6,7 @@
     function ProfileController($location, $routeParams, UserService) {
         var vm = this;
 
-        var userId = $routeParams.uid;
+        // var userId = $routeParams.uid;
 
         vm.updateUser = updateUser;
         vm.unregisterUser = unregisterUser;
@@ -14,7 +14,8 @@
 
         function init() {
             UserService
-                .findUserById(userId)
+                // .findUserById(userId)
+                .findCurrentUser()
                 .success(function(user){
                     if(user != '0') {
                         vm.user = user;

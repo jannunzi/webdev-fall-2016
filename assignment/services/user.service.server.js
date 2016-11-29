@@ -3,6 +3,7 @@ module.exports = function(app, model) {
 
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var cookieParser  = require('cookie-parser');
     var session       = require('express-session');
 
@@ -24,21 +25,95 @@ module.exports = function(app, model) {
         {username: 'charlie', password: 'ewq', _id: 345, first: 'Charlie', last: 'Brown'}
     ];
 
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout', logout);
     app.post('/api/checkLogin', checkLogin);
+    app.post('/api/checkAdmin', checkAdmin);
     app.post('/api/user', createUser);
+    // app.get('/api/admin/user', admin, findAllUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
-    app.put('/api/user/:uid', updateUser);
-    app.delete('/api/user/:uid', unregisterUser);
+    app.put('/api/user/:uid', loggedInAndSelf, updateUser);
+    app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/assignment/index.html#/user',
+            failureRedirect: '/assignment/index.html#/login'
+        }));
 
+    var googleConfig = {
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    };
+
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+    function loggedInAndSelf(req, res, next) {
+        var loggedIn = req.isAuthenticated();
+        var userId = req.params.uid;
+        var self = userId == req.user._id;
+        if(self && loggedIn) {
+            next();
+        } else {
+            res.sendStatus(400).send("You are not the same person");
+        }
+    }
     
+    function googleStrategy(token, refreshToken, profile, done) {
+        console.log(profile);
+        model.userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            first: profile.name.givenName,
+                            last:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return model.userModel.createUser(newGoogleUser)
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
     function logout(req, res) {
         req.logout();
         res.send(200);
     }
-    
+
+    function checkAdmin(req, res) {
+        var loggedIn = req.isAuthenticated();
+        var isAdmin = req.user.role == "ADMIN";
+        if(loggedIn && isAdmin) {
+            res.json(req.user);
+        } else {
+            res.send('0');
+        }
+    }
+
     function checkLogin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
@@ -149,6 +224,8 @@ module.exports = function(app, model) {
             findUserByCredentials(req, res);
         } else if(query.username) {
             findUserByUsername(req, res);
+        } else {
+            res.json(req.user);
         }
     }
 

@@ -13,11 +13,13 @@
         var api = {
             findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
+            findCurrentUser: findCurrentUser,
             createUser: createUser,
             updateUser: updateUser,
             unregisterUser: unregisterUser,
             login: login,
             checkLogin: checkLogin,
+            checkAdmin: checkAdmin,
             logout: logout
         };
         return api;
@@ -28,6 +30,10 @@
 
         function checkLogin() {
             return $http.post("/api/checkLogin");
+        }
+
+        function checkAdmin() {
+            return $http.post("/api/checkAdmin");
         }
 
         function login(username, password) {
@@ -54,6 +60,11 @@
                 password: password
             };
             return $http.post("/api/user", user);
+        }
+        
+        function findCurrentUser() {
+            var url = "/api/user";
+            return $http.get(url);
         }
 
         function findUserById(userId) {

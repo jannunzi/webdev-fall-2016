@@ -6,7 +6,13 @@ module.exports = function() {
         password: String,
         first: String,
         last: String,
-        role: {type: String, enum: ['ADMIN', 'STUDENT', 'FACULTY']},
+        email: String,
+        google: {
+            id: String,
+            token: String,
+            email: String
+        },
+        role: {type: String, default: "STUDENT", enum: ['ADMIN', 'STUDENT', 'FACULTY']},
         websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}]
         // websites: [WebsiteSchema],
     }, {collection: "user"});
