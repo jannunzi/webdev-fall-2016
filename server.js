@@ -14,6 +14,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.set('view engine', 'ejs');
+
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({type: 'website/json'}));
@@ -25,6 +27,7 @@ app.use(express.static(__dirname + '/public'));
 // require ("./test/app.js")(app);
 
 require("./assignment/app.js")(app);
+require("./ejs/app.js")(app);
 
 var websites = [
     {_id: 321, name: 'facebook.com', uid: 123},

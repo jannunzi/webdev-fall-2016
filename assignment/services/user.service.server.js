@@ -34,7 +34,7 @@ module.exports = function(app, model) {
     // app.get('/api/admin/user', admin, findAllUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
-    app.put('/api/user/:uid', loggedInAndSelf, updateUser);
+    app.put('/api/user/:uid',    loggedInAndSelf, updateUser);
     app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
     app.get('/auth/google/callback',
         passport.authenticate('google', {

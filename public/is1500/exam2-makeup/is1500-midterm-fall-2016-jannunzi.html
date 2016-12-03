@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="is1500-midterm-fall-2016-jannunzi.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h2>Get Quote on Cell Phone Service</h2>
+        <hr>
+
+        Number of Cell Phone Lines:
+        <input id="lines"
+               type="number"
+               min="1"
+               max="6"
+               value="1"/>
+        <span id="error">
+            Enter a number between 1 and 10!
+        </span>
+        <br/>
+
+        <input id="tv"
+               type="checkbox"/>
+        Combine with TV Service (10% Savings!!!)
+        <br/>
+
+        <input id="internet"
+               type="checkbox"/>
+        Combine with Internet Service (Another 10% Savings!!!)
+        <br/>
+
+        Start service effective:
+        <input id="start"
+               type="date" value="2016-11-30"/>
+        <br/>
+
+        <button onclick="getQuote()">Request Quote</button>
+        <br/>
+
+        <span id="quote">
+            The cost of cell phone service, combined with TV service, and Internet service, will be: $1234
+        </span>
+    </div>
+
+    <script>
+        function getQuote() {
+            
+        }
+    </script>
+</body>
+</html>

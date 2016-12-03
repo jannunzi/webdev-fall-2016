@@ -1,0 +1,13 @@
+h2 {
+    color: #ff00ff;
+}
+
+#error {
+    color: #ff0000;
+    font-style: italic;
+    font-size: 9pt;
+}
+
+#quote {
+    font-style: italic;
+}

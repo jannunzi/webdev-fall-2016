@@ -1,0 +1,19 @@
+<% include header.ejs %>
+
+<h1>Hello World !!!!</h1>
+
+<h2>Instructor: <%= instructor %></h2>
+
+<ul>
+<% for(var c in courses) { -%>
+    <li><%= courses[c].name %></li>
+<% } -%>
+</ul>
+
+<%= courses %>
+
+<% var message = "Hello Joe" -%>
+
+<p>
+Message: <%= message %>
+</p>

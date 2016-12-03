@@ -1,0 +1,17 @@
+<% include header.ejs %>
+
+<h1>Home</h1>
+
+<%- html %>
+
+<% var size = 2%>
+
+<h<%= size %>>
+    This is a dynamic H2 Tag
+</h<%= size %>>
+
+<% for(var s=1; s<=6; s++) { %>
+    <h<%=s%>>
+        Header of size <%=s%>
+    </h<%=s%>>
+<% } %>
