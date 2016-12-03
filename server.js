@@ -43,6 +43,7 @@ require("./experiments/app.js")(app);
 require("./lecture/app.js")(app);
 require("./sandbox/todo/app.js")(app);
 require("./experiments/todo/app.js")(app);
+require("./sandbox/http/proxy")(app);
 // require("./sandbox/websites/model/test.model.server")(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
