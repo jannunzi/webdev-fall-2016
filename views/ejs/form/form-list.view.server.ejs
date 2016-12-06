@@ -1,0 +1,44 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+<div class="container-fluid">
+    <h1>Form List</h1>
+
+    <%  var formName = "";
+        var formId = "";
+        if(typeof form != "undefined") {
+            formName = form.name;
+            formId = form._id;
+        }
+    %>
+
+    <form action="/ejs/form" method="post">
+
+    <div class="input-group">
+
+        <input value="<%= formName %>" type="text" name="name" class="form-control" placeholder="Search for...">
+        <input name="_id" value="<%= formId%>" type="hidden"/>
+
+        <span class="input-group-btn">
+            <button name="action" value="update" class="btn btn-success" type="submit">Update</button>
+            <button name="action" value="create" class="btn btn-primary" type="submit">Add</button>
+        </span>
+    </div>
+
+    </form>
+
+    <br/>
+
+    <ul class="list-group">
+        <% for(var f in forms) { %>
+        <li class="list-group-item">
+            <a href="/ejs/form/<%= forms[f]._id %>/details"><%= forms[f].name %></a>
+            <span class="pull-right">
+                <a href="/ejs/form/<%= forms[f]._id %>"><span class="glyphicon glyphicon-cog"></span></a>
+                <a href="/ejs/form/<%= forms[f]._id %>/delete">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </span>
+        </li>
+        <% } %>
+    </ul>
+</div>

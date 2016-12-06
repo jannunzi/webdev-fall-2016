@@ -1,0 +1,49 @@
+<% include header.view.server.ejs%>
+
+<%
+    var formName = "";
+    var formId = "";
+    if(typeof form !== "undefined") {
+        formName = form.name;
+        formId = form._id;
+    }
+  %>
+
+<div class="container-fluid">
+    <h1>Form List</h1>
+
+    <form method="post" action="/sandbox/ejs/form" class="input-group">
+        <input type="text"
+               name="name"
+               value="<%= formName %>"
+               class="form-control"
+               placeholder="Form Name">
+        <input type="hidden"
+               name="_id"
+               value="<%= formId %>"/>
+        <span class="input-group-btn">
+            <button name="action" value="create" class="btn btn-primary" type="submit">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button name="action" value="update" class="btn btn-success" type="submit">
+                <span class="glyphicon glyphicon-ok"></span>
+            </button>
+        </span>
+    </form>
+
+    <br/>
+
+    <ul class="list-group">
+        <% for (var f in forms) { %>
+        <li class="list-group-item">
+            <%= forms[f].name %>
+            <a class="pull-right" href="/sandbox/ejs/form/<%=forms[f]._id%>/edit">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <a class="pull-right" href="/sandbox/ejs/form/<%=forms[f]._id%>/delete">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+</div>

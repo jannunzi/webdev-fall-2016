@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/public'));
 // require ("./test/app.js")(app);
 
 require("./assignment/app.js")(app);
-require("./ejs/app.js")(app);
+require("./ejs/hello/app.js")(app);
 
 var websites = [
     {_id: 321, name: 'facebook.com', uid: 123},
@@ -44,6 +44,12 @@ require("./lecture/app.js")(app);
 require("./sandbox/todo/app.js")(app);
 require("./experiments/todo/app.js")(app);
 require("./sandbox/http/proxy")(app);
+require("./sandbox/ejs/forms/app.js")(app);
+
+require("./ejs/forms/app")(app);
+
+require("./ejs/math/app")(app);
+
 // require("./sandbox/websites/model/test.model.server")(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
