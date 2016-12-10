@@ -1,0 +1,11 @@
+{
+  "applicationName": "Courses",
+  "entities": [
+    {"name": "course"},
+    {"name": "lesson"}
+  ],
+  "pages": [
+
+  ],
+  "startPage": "course"
+}

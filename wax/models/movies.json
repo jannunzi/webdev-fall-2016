@@ -1,0 +1,39 @@
+{
+  "applicationName": "movies",
+  "views": [],
+  "entities" : {
+    "actor" : {
+      "name" : "actor",
+      "label" : "Actor",
+      "fields" : [
+        {"name": "first", "type": "text", "label": "First Name"},
+        {"name": "last", "type": "text", "label": "Last Name"}
+      ],
+      "listField": "first",
+      "relations": {
+        "movie": {
+          "name": "movie",
+          "type": "map",
+          "label": "Movies",
+          "role": "parent"
+        }
+      }
+    },
+    "movie" : {
+      "name": "movie",
+      "label": "Movie",
+      "fields" : [
+        {"name": "title", "type": "text", "label": "Title"}
+      ],
+      "listField": "title",
+      "relations": {
+        "actor": {
+          "name": "actor",
+          "type": "map",
+          "label": "Actors",
+          "role": "child"
+        }
+      }
+    }
+  }
+}

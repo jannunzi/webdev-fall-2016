@@ -1,0 +1,76 @@
+{
+  "applicationName": "store",
+  "views": [],
+  "entities" : {
+    "customer" : {
+      "name" : "customer",
+      "label" : "Customer",
+      "fields" : [
+        {"name": "first", "type": "text", "label": "First Name"},
+        {"name": "last", "type": "text", "label": "Last Name"}
+      ],
+      "listField": "first",
+      "relations": {
+        "wishlist": {
+          "name": "wishlist",
+          "type": "map",
+          "label": "Wishlists",
+          "role": "child"
+        },
+        "product": {
+          "name": "product",
+          "type": "map",
+          "label": "Shopping Cart",
+          "role": "child"
+        }
+      }
+    },
+    "wishlist" : {
+      "name": "wishlist",
+      "label": "Wishlist",
+      "fields" : [
+        {"name": "name", "type": "text", "label": "Name"}
+      ],
+      "listField": "name",
+      "relations": {
+        "product": {
+          "name": "product",
+          "type": "map",
+          "label": "Products",
+          "role": "child"
+        },
+        "customer": {
+          "name": "customer",
+          "type": "map",
+          "label": "Customer",
+          "role": "parent"
+        }
+      }
+    },
+    "product" : {
+      "name": "product",
+      "label": "Product",
+      "fields" : [
+        {"name": "name", "type": "text", "label": "Name"},
+        {"name": "price", "type": "number", "label": "Price"},
+        {"name": "quantity", "type": "number", "label": "Quantiry"},
+        {"name": "description", "type": "textarea", "label": "Description"}
+      ],
+      "listField": "name",
+      "relations": {
+        "wishlist": {
+          "name": "wishlist",
+          "type": "map",
+          "label": "Wishlists",
+          "role": "parent"
+        },
+        "customer": {
+          "name": "customer",
+          "type": "map",
+          "label": "Customers",
+          "role": "parent"
+        }
+      }
+    }
+  }
+}

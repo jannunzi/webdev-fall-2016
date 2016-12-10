@@ -1,0 +1,82 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .factory("<%= entityName %>Service", <%= entityName %>Service)
+        .factory("entityService", entityService);
+
+    function entityService($http) {
+        var api = {
+            findAllEntities: findAllEntities
+        };
+        return api;
+
+        function findAllEntities() {
+            return $http.get("/wax/<%= applicationName %>/api/entity");
+        }
+    }
+
+    function <%= entityName %>Service($http) {
+        var api = {
+            "create<%= entityNameCapitalized %>": create<%= entityNameCapitalized %>,
+            "findAll<%= entityNameCapitalized %>s": findAll<%= entityNameCapitalized %>s,
+            "find<%= entityNameCapitalized %>ById": find<%= entityNameCapitalized %>ById,
+            "delete<%= entityNameCapitalized %>": delete<%= entityNameCapitalized %>,
+            "update<%= entityNameCapitalized %>": update<%= entityNameCapitalized %>,
+<%  var relations = entity.relations;
+    for(var relatedEntityName in relations) {
+        var relation = relations[relatedEntityName];
+        var relatedEntityNameCapitalize = capitalizeFirstLetter(relatedEntityName);
+-%>
+            "set<%= relatedEntityNameCapitalize %>s": set<%= relatedEntityNameCapitalize %>s,
+            "get<%= relatedEntityNameCapitalize %>s": get<%= relatedEntityNameCapitalize %>s,
+<%  }
+-%>
+        };
+        return api;
+
+<%  for(var relatedEntityName in relations) {
+    var relation = relations[relatedEntityName];
+    var relatedEntityNameCapitalize = capitalizeFirstLetter(relatedEntityName);
+-%>
+        function set<%= relatedEntityNameCapitalize %>s(<%= entityName %>Id, <%= relatedEntityName%>s) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>/" + <%= entityName %>Id + "/<%= relatedEntityName%>/map";
+            return $http.put(url, <%= relatedEntityName%>s);
+        }
+        function get<%= relatedEntityNameCapitalize %>s(<%= entityName %>Id, <%= relatedEntityName%>s) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>/" + <%= entityName %>Id + "/<%= relatedEntityName%>/map";
+            return $http.get(url);
+        }
+
+<%  }
+-%>
+        function create<%= entityNameCapitalized %>(<%= entityName %>) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>";
+            return $http.post(url, <%= entityName %>);
+        }
+
+        function findAll<%= entityNameCapitalized %>s() {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>";
+            return $http.get(url);
+        }
+
+        function find<%= entityNameCapitalized %>ById(<%= entityName %>Id) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>/" + <%= entityName %>Id;
+            return $http.get(url);
+        }
+
+        function delete<%= entityNameCapitalized %>(<%= entityName %>Id) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>/" + <%= entityName %>Id;
+            return $http.delete(url);
+        }
+
+        function update<%= entityNameCapitalized %>(<%= entityName %>Id, <%= entityName %>) {
+            var url = "/wax/<%= applicationName %>/api/<%= entityName %>/" + <%= entityName %>Id;
+            return $http.put(url, <%= entityName %>);
+        }
+    }
+<%
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+%>
+})();

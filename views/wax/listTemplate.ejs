@@ -1,0 +1,23 @@
+<h1>
+    <%= entityNameCapitalized %>s
+</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a><%= entity.listField %></a>
+        <a href="#/<%= entityName %>/new" class="pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </li>
+    <li ng-repeat="<%= entityName %> in model.<%= entityName %>s" class="list-group-item">
+        <a href="#/<%= entityName %>/{{<%= entityName %>._id}}">
+            {{<%= entityName %>.<%= entity.listField %>}}
+        </a>
+        <a ng-click="model.delete<%= entityNameCapitalized %>(<%= entityName %>._id)" class="pull-right">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <a href="#/<%= entityName %>/{{<%= entityName %>._id}}" class="pull-right">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+    </li>
+</ul>

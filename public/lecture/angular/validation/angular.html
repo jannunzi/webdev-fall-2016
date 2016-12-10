@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ValidationApp">
+<head>
+    <link href="../../../css/bootstrap.css" rel="stylesheet"/>
+    <script src="../../../js/angular.js"></script>
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ng-submitted.ng-invalid {
+            background-color: red;
+        }
+        .ng-submitted .ng-invalid {
+            background-color: indianred;
+        }
+        form {
+            padding: 10px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .ng-invalid .error {
+            color: white;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="ValidationController as model">
+        <h1>Angular Form Validation</h1>
+        <div ng-show="model.error" class="alert alert-warning">
+            {{model.error}}
+        </div>
+        <div ng-show="form1.$invalid && form1.$submitted" class="alert alert-danger">
+            There were errors in your form.
+            <ul>
+                <li ng-show="form1.username.$invalid">Username is required</li>
+                <li ng-show="form1.email.$invalid">The email format is wrong</li>
+            </ul>
+        </div>
+        <form name="form1" novalidate>
+            <input name="username"
+                   ng-model="user.username"
+                   required
+                   type="text"
+                   class="form-control"/>
+            <div ng-show="form1.username.$invalid && form1.$submitted"
+                 class="error">Username is required</div>
+            <input name="email"
+                   ng-model="user.email"
+                   type="email"
+                   class="form-control"/>
+            <div ng-show="form1.email.$invalid && form1.$submitted"
+                 class="error">The email format is wrong</div>
+            <button ng-click="model.submitForm(user)" type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        <h2>username Validation Status</h2>
+        {{form1.username}}
+
+        <h2>form1 Validation Status</h2>
+        {{form1}}
+    </div>
+</body>
+</html>

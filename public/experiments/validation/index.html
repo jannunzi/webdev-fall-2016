@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AngularValidateApp">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.min.js"></script>
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        input.ng-invalid.ng-touched {
+            background-color: #FA787E;
+        }
+
+        input.ng-valid.ng-touched {
+            background-color: #78FA89;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Angular Validation</title>
+</head>
+<body>
+    <div ng-controller="validationController as model" class="container-fluid">
+        <h1>Angular Validation</h1>
+
+        <div ng-show="form1.$invalid && form1.$submitted" class="alert alert-danger" role="alert">
+            There were errors in the form, please fix them
+            <ul>
+                <li ng-show="form1.first.$invalid">First Name is Required</li>
+                <li ng-show="form1.email.$invalid">Email Format error</li>
+            </ul>
+        </div>
+
+        <form name="form1" novalidate>
+            <input ng-model="model.user.first"
+                   class="form-control"
+                   placeholder="Alice"
+                   required name="first"/>
+            <div ng-show="form1.first.$invalid && form1.$submitted"
+                 class="error">
+                First Name is required
+            </div>
+            <input ng-model="model.user.last"
+                   class="form-control"
+                   placeholder="Wonderland"/>
+            <input ng-model="model.user.email"
+                   name="email"
+                   type="email"
+                   class="form-control"
+                   placeholder="alice@wonderland.com"/>
+            <div ng-show="form1.$submitted && form1.email.$invalid" class="error">
+                Email format error
+            </div>
+            <button ng-click="model.updateUser(model.user)" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        <h2>form1.first</h2>
+        {{form1.first}}
+        <h2>form1</h2>
+        {{form1 | json}}
+    </div>
+</body>
+</html>

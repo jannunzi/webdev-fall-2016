@@ -1,0 +1,20 @@
+(function() {
+    angular
+        .module("<%= applicationName %>")
+        .config(Config);
+
+    function Config($routeProvider) {
+        $routeProvider
+<% for(var e in entities) {-%>
+            .when("/<%= entities[e].name %>", {
+                templateUrl: "/sandbox/wax/<%= applicationName %>/entity/<%= entities[e].name %>/list.html"
+            })
+            .when("/<%= entities[e].name %>/:<%= entities[e].name %>Id", {
+                templateUrl: "/sandbox/wax/<%= applicationName %>/entity/<%= entities[e].name %>/details.html"
+            })
+<% } -%>
+            .otherwise({
+                redirectTo: "/<%= startPage %>"
+            });
+    }
+})();

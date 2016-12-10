@@ -1,0 +1,69 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .config(Config);
+
+    function Config($routeProvider) {
+        $routeProvider
+            //
+            // VIEW CONTROLLERS
+            //
+<% for(var p in views) {
+-%>
+            .when("/<%= views[p].name %>", {
+                templateUrl: "/wax/<%= applicationName %>/templates/<%= views[p].name %>.html"
+            })
+<% }
+-%>
+            //
+            // ENTITY CONTROLLERS
+            //
+<% for(var p in entities) {
+-%>
+            //
+            // <%= entities[p].name %> Entity Controllers
+            //
+            .when("/<%= entities[p].name %>", {
+                templateUrl: "/wax/<%= applicationName %>/templates/<%= entities[p].name %>/list/list.html",
+                controller: "<%= entities[p].name %>ListController",
+                controllerAs: "model"
+            })
+            .when("/<%= entities[p].name %>/new", {
+                templateUrl: "/wax/<%= applicationName %>/templates/<%= entities[p].name %>/details/details.html",
+                controller: "<%= entities[p].name %>DetailsController",
+                controllerAs: "model"
+            })
+            .when("/<%= entities[p].name %>/:<%= entities[p].name %>Id", {
+                templateUrl: "/wax/<%= applicationName %>/templates/<%= entities[p].name %>/details/details.html",
+                controller: "<%= entities[p].name %>DetailsController",
+                controllerAs: "model"
+            })
+<%      if(entities[p].relations) {
+            for(var relatedEntityName in entities[p].relations) {
+                var relation = entities[p].relations[relatedEntityName];
+-%>
+            .when("/<%= entities[p].name %>/:<%= entities[p].name %>Id/<%= relatedEntityName %>/map", {
+                templateUrl: "/wax/<%= applicationName %>/templates/<%= entities[p].name %>/map/<%= relatedEntityName %>/<%= entities[p].name %>2<%= relatedEntityName %>Map.html",
+                controller: "<%= entities[p].name %>2<%= relatedEntityName %>MapController",
+                controllerAs: "model"
+            })
+<%          }
+        }
+    }
+-%>
+            //
+            // default
+            //
+            .when("/entity", {
+                templateUrl: "/wax/entity-list.view.client.html",
+                controller:  "entityListController",
+                controllerAs: "model"
+            })
+            .when("/default", {
+                templateUrl: "/wax/default.html"
+            })
+            .otherwise({
+                redirectTo: "/default"
+            });
+    }
+})();

@@ -1,0 +1,60 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .controller("<%= entityName %>DetailsController", <%= entityName %>DetailsController);
+
+    function <%= entityName %>DetailsController($routeParams, <%= entityName %>Service, $location) {
+        var vm = this;
+        vm.<%= entityName %>Id = $routeParams.<%= entityName %>Id;
+        vm.create<%= entityNameCapitalized %> = create<%= entityNameCapitalized %>;
+        vm.update<%= entityNameCapitalized %> = update<%= entityNameCapitalized %>;
+        vm.delete<%= entityNameCapitalized %> = delete<%= entityNameCapitalized %>;
+
+        function init() {
+            if(vm.<%= entityName %>Id) {
+                <%= entityName %>Service
+                    .find<%= entityNameCapitalized %>ById(vm.<%= entityName %>Id)
+                    .success(function (<%= entityName %>) {
+                        vm.<%= entityName %> = <%= entityName %>;
+                    })
+                    .error(function (error) {
+                        vm.error = error;
+                    });
+            }
+        }
+        init();
+
+        function create<%= entityNameCapitalized %>(<%= entityName %>) {
+            <%= entityName %>Service
+                .create<%= entityNameCapitalized %>(<%= entityName %>)
+                .success(function (<%= entityName %>) {
+                    $location.url("/<%= entityName %>");
+                })
+                .error(function (error) {
+                    vm.error = error;
+                });
+        }
+
+        function update<%= entityNameCapitalized %>(<%= entityName %>Id, <%= entityName %>) {
+            <%= entityName %>Service
+                .update<%= entityNameCapitalized %>(<%= entityName %>Id, <%= entityName %>)
+                .success(function (status) {
+                    $location.url("/<%= entityName %>");
+                })
+                .error(function (error) {
+                    vm.error = error;
+                });
+        }
+
+        function delete<%= entityNameCapitalized %>(<%= entityName %>Id) {
+            <%= entityName %>Service
+                .delete<%= entityNameCapitalized %>(<%= entityName %>Id)
+                .success(function (status) {
+                    $location.url("/<%= entityName %>");
+                })
+                .error(function (error) {
+                    vm.error = error;
+                });
+        }
+    }
+})();

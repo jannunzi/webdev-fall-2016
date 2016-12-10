@@ -1,0 +1,75 @@
+<h4 class="text-center">
+    <a href="#/<%= entityName %>/{{model.<%= entityName %>Id}}" class="pull-left">
+        <span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a href="#/<%= entityName %>">
+        <%= entityName %>
+    </a>
+    <span class="glyphicon glyphicon-resize-horizontal"></span>
+    <a href="#/<%= relatedEntityName %>">
+        <%= relatedEntityName %>
+    </a>
+    <a ng-click="model.doneSelecting<%= relatedEntityNameCapitalized %>s()" class="wax-margin-left-15px pull-right">
+    <span class="glyphicon glyphicon-ok">
+    </span>
+    </a>
+</h4>
+
+<%
+    var listField = application.entities[relatedEntityName].listField;
+%>
+<div>
+    <label>Selected <%= relatedEntityName %>s</label>
+    <a ng-click="model.updateSelecting<%= relatedEntityNameCapitalized %>s(true)" class="wax-margin-left-15px pull-right">
+        <span class="glyphicon glyphicon-ok">
+        </span>
+    </a>
+    <a>
+        <span class="pull-right glyphicon glyphicon-search">
+        </span>
+    </a>
+</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <%= listField %>
+        <span class="pull-right">
+            <input type="checkbox" class="pull-right"/>
+        </span>
+    </li>
+    <li ng-repeat="<%= relatedEntityName %> in model.<%= relatedEntityName %>s" class="list-group-item">
+        <a href="#/<%= relatedEntityName %>/{{<%= relatedEntityName %>._id}}">
+            {{<%= relatedEntityName %>.<%= listField %>}}
+        </a>
+        <input ng-model="model.selected<%= relatedEntityNameCapitalized %>[<%= relatedEntityName %>._id]" type="checkbox"
+               class="pull-right"/>
+        <span class="pull-right glyphicon glyphicon-align-justify wax-margin-left-15px">
+        </span>
+    </li>
+</ul>
+
+<div>
+    <label>Select from the following <%= relatedEntityName %>s</label>
+    <a ng-click="model.updateSelecting<%= relatedEntityNameCapitalized %>s(true)" class="wax-margin-left-15px pull-right">
+        <span class="glyphicon glyphicon-ok">
+        </span>
+    </a>
+    <a>
+        <span class="pull-right glyphicon glyphicon-search">
+        </span>
+    </a>
+</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <%= listField %>
+        <span class="pull-right">
+            <input type="checkbox" class="pull-right"/>
+        </span>
+    </li>
+    <li ng-repeat="<%= relatedEntityName %> in model.all<%= relatedEntityNameCapitalized %>s"
+        class="list-group-item">
+        <a>
+            {{<%= relatedEntityName %>.<%= listField %>}}
+        </a>
+        <input ng-model="model.selected<%= relatedEntityNameCapitalized %>[<%= relatedEntityName %>._id]" type="checkbox"
+               class="pull-right"/>
+    </li>
+</ul>

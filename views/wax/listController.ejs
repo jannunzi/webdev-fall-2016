@@ -1,0 +1,37 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .controller("<%= entityName %>ListController", <%= entityName %>ListController);
+
+    function <%= entityName %>ListController(<%= entityName %>Service) {
+        var vm = this;
+        vm.delete<%= entityNameCapitalized %> = delete<%= entityNameCapitalized %>;
+
+        function init() {
+            load<%= entityNameCapitalized %>s();
+        }
+        init();
+
+        function delete<%= entityNameCapitalized %>(<%= entityName %>Id) {
+            <%= entityName %>Service
+                .delete<%= entityNameCapitalized %>(<%= entityName %>Id)
+                .success(function (status) {
+                    load<%= entityNameCapitalized %>s();
+                })
+                .error(function (error) {
+                    vm.error = error;
+                });
+        }
+
+        function load<%= entityNameCapitalized %>s() {
+            <%= entityName %>Service
+                .findAll<%= entityNameCapitalized %>s()
+                .success(function(<%= entityName %>s){
+                    vm.<%= entityName %>s = <%= entityName %>s;
+                })
+                .error(function(error){
+                    console.log(error);
+                });
+        }
+    }
+})();

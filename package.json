@@ -9,11 +9,13 @@
     "ejs": "^2.5.3",
     "express": "^4.13.4",
     "express-session": "^1.14.2",
+    "mongojs": "^2.4.0",
     "mongoose": "^4.4.15",
     "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {},
   "scripts": {

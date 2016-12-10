@@ -1,0 +1,71 @@
+<h1>
+    <a href="#/<%=entityName%>"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <%= entityNameCapitalized %>
+
+    <a ng-show="!model.<%=entityName%>Id" ng-click="model.create<%=entityNameCapitalized%>(model.<%=entityName%>)"
+       class="pull-right"><span
+                class="glyphicon glyphicon-ok"></span></a>
+    <a ng-show="model.<%=entityName%>Id" ng-click="model.update<%=entityNameCapitalized%>(model.<%=entityName%>Id, model.<%=entityName%>)"
+       class="pull-right"><span
+                class="glyphicon glyphicon-ok"></span></a>
+
+</h1>
+
+<%  var entity = application.entities[entityName];
+    for(var f in application.entities[entityName].fields) {
+        var field = application.entities[entityName].fields[f];
+    -%>
+<% if(field.type == 'textarea') { %>
+    <label for="<%= field.name %>"><%= field.label %></label>
+    <textarea ng-model="model.<%= entityName %>.<%= field.name %>"
+           name="<%= field.name %>"
+           id="<%= field.name %>"
+           class="form-control"
+           rows="<%= field.rows%>"
+           placeholder="<%= field.name %>"></textarea>
+<% } else { %>
+    <label for="<%= field.name %>"><%= field.label %></label>
+    <input ng-model="model.<%= entityName %>.<%= field.name %>"
+           type="<%= field.type %>"
+           name="<%= field.name %>"
+           id="<%= field.name %>"
+           class="form-control"
+           placeholder="<%= field.name %>"/>
+<% } %>
+<br/>
+<% } -%>
+<%  if(entity.relations) {
+-%>
+<ul class="list-group">
+<%      for(var r in entity.relations) {
+            var relation = entity.relations[r];
+-%>         <li class="list-group-item">
+                <a href="#/<%= entityName %>/{{model.<%= entityName %>Id}}/<%= r %>/map">
+                    <%= relation.label %>
+                </a>
+                <a class="pull-right" href="#/<%= entityName %>/{{model.<%= entityName %>Id}}/<%= r %>/map"><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+    </li>
+<%      }
+-%>
+</ul>
+<%  }
+-%>
+<a ng-click="model.create<%=entityNameCapitalized%>(model.<%=entityName%>)"
+   class="btn btn-block btn-primary"
+   ng-show="!model.<%= entityName %>Id">
+    Create
+</a>
+<a ng-click="model.create<%=entityNameCapitalized%>(model.<%=entityName%>)"
+   class="btn btn-block btn-primary"
+   ng-show="model.<%= entityName %>Id">
+    Update
+</a>
+<a ng-click="model.delete<%=entityNameCapitalized%>(model.<%=entityName%>Id)"
+   class="btn btn-block btn-danger"
+   ng-show="model.<%= entityName %>Id">
+    Delete
+</a>
+<a href="#/<%=entityName%>" class="btn btn-block btn-warning">
+    Cancel
+</a>

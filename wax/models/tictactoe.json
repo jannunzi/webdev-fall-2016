@@ -1,0 +1,49 @@
+{
+  "applicationName": "tictactoe",
+  "views": [
+    {"name": "page1"},
+    {"name": "page2"},
+    {"name": "page3"}
+  ],
+  "entities" : {
+    "course" : {
+      "name" : "course",
+      "fields" : [
+        {"name": "title", "type": "text", "label": "Title"},
+        {"name": "description", "type": "textarea", "label": "Description", "rows": 10}
+      ],
+      "listField": "title",
+      "relations": {
+        "student": {
+          "name": "student",
+          "type": "map",
+          "label": "Students",
+          "role": "child"
+        },
+        "section": {
+          "name": "section",
+          "type": "map",
+          "label": "Sections",
+          "role": "child"
+        }
+      }
+    },
+    "student" : {
+      "name": "student",
+      "fields" : [
+        {"name": "first", "type": "text", "label": "First Name"},
+        {"name": "last", "type": "text", "label": "Last Name"},
+        {"name": "email", "type": "email", "label": "Email"}
+      ],
+      "listField": "last",
+      "relations": {
+        "course": {
+          "name": "course",
+          "type": "map",
+          "label": "Courses",
+          "role": "parent"
+        }
+      }
+    }
+  }
+}

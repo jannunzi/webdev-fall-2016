@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="<%= applicationName %>">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/wax/css/styles.css" rel="stylesheet"/>
+    <script src="/js/angular.js"></script>
+    <script src="/js/angular-route.js"></script>
+    <script src="/wax/<%= applicationName %>/app.js"></script>
+    <script src="/wax/<%= applicationName %>/config.js"></script>
+<% for(var entityName in entities) {
+        var entity = entities[entityName];
+-%>
+    <script src="/wax/<%= applicationName %>/controllers/<%= entityName %>/list/<%= entityName %>ListController.js"></script>
+    <script src="/wax/<%= applicationName %>/controllers/<%= entityName %>/details/<%= entityName %>DetailsController.js"></script>
+    <script src="/wax/<%= applicationName %>/services/<%= entityName %>/<%= entityName %>Service.js"></script>
+<%  if(entity.relations) {
+        for(var relatedEntity in entity.relations) {
+            var relation = entity.relations[relatedEntity];
+-%>
+    <script src="/wax/<%= applicationName %>/controllers/<%= entityName %>/map/<%= relatedEntity %>/<%= entityName %>2<%= relatedEntity %>MapListController.js"></script>
+<%      }
+    }
+   } -%>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container-fluid" ng-view>
+    </div>
+</body>
+</html>

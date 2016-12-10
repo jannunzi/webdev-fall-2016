@@ -1,0 +1,7 @@
+{
+  "applicationName": "ewq",
+  "entities": [
+    {"name": "course"},
+    {"name": "lesson"}
+  ]
+}

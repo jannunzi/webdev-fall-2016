@@ -1,0 +1,70 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .controller("<%= entityName %>2<%= relatedEntityName %>MapController", <%= entityName %>2<%= relatedEntityName %>MapController);
+
+    function <%= entityName %>2<%= relatedEntityName %>MapController($location, $routeParams, <%= entityName %>Service, <%= relatedEntityName %>Service) {
+        var vm = this;
+        vm.doneSelecting<%= relatedEntityNameCapitalized %>s = doneSelecting<%= relatedEntityNameCapitalized %>s;
+        vm.updateSelecting<%= relatedEntityNameCapitalized %>s = updateSelecting<%= relatedEntityNameCapitalized %>s;
+        vm.<%= entityName %>Id = $routeParams.<%= entityName %>Id;
+
+        function init() {
+            loadAllInstancesFromRelatedEntity();
+            loadRelatedEntityInstances();
+        }
+        init();
+
+        function doneSelecting<%= relatedEntityNameCapitalized %>s() {
+            updateSelecting<%= relatedEntityNameCapitalized %>s(false);
+            $location.url("/<%= entityName %>/" + vm.<%= entityName %>Id);
+        }
+
+        function updateSelecting<%= relatedEntityNameCapitalized %>s(reload) {
+            var <%= relatedEntityName %>s = [];
+            for(var id in vm.selected<%= relatedEntityNameCapitalized %>) {
+                if(vm.selected<%= relatedEntityNameCapitalized %>[id]) {
+                    <%= relatedEntityName %>s.push(id);
+                }
+            }
+            <%= entityName %>Service
+                .set<%= relatedEntityNameCapitalized %>s(vm.<%= entityName %>Id, <%= relatedEntityName %>s)
+                .success(function(status){
+                    vm.status = status;
+                    if(reload) {
+                        loadRelatedEntityInstances();
+                    }
+                })
+                .error(function(err){
+                    vm.error = err;
+                });
+        }
+
+        function loadRelatedEntityInstances() {
+            vm.selected<%= relatedEntityNameCapitalized %> = [];
+            <%= entityName %>Service
+                .get<%= relatedEntityNameCapitalized %>s(vm.<%= entityName %>Id)
+                .success(function(<%= relatedEntityName %>s){
+                    vm.<%= relatedEntityName %>s = <%= relatedEntityName %>s;
+                    for(var i in <%= relatedEntityName %>s) {
+                        var <%= relatedEntityName %> = <%= relatedEntityName %>s[i];
+                        vm.selected<%= relatedEntityNameCapitalized %>[<%= relatedEntityName %>._id] = true;
+                    }
+                })
+                .error(function(err){
+                    vm.error = err;
+                });
+        }
+
+        function loadAllInstancesFromRelatedEntity() {
+            <%= relatedEntityName %>Service
+                .findAll<%= relatedEntityNameCapitalized %>s()
+                .success(function(<%= relatedEntityName %>s){
+                    vm.all<%= relatedEntityNameCapitalized %>s = <%= relatedEntityName %>s;
+                })
+                .error(function(err){
+                    vm.error = err;
+                });
+        }
+    }
+})();

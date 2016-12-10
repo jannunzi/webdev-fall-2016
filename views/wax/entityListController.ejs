@@ -1,0 +1,34 @@
+(function(){
+    angular
+        .module("<%= applicationName %>")
+        .controller("entityListController", entityListController);
+
+    function entityListController(entityService) {
+        var vm = this;
+        vm.deleteEntity = deleteEntity;
+        vm.createEntity = createEntity;
+        vm.findAllEntities = findAllEntities;
+
+        function init() {
+            findAllEntities();
+        }
+        init();
+
+        function findAllEntities() {
+            entityService
+                .findAllEntities
+                .success(function (entities) {
+                    vm.entities = entities
+                })
+                .error(function (error) {
+                    vm.error = error;
+                });
+        }
+
+        function createEntity(entity) {
+        }
+
+        function deleteEntity(entity) {
+        }
+    }
+})();

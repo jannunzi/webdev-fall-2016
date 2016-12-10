@@ -50,6 +50,10 @@ require("./ejs/forms/app")(app);
 
 require("./ejs/math/app")(app);
 
+require("./sandbox/wax/app")(app);
+
+require("./wax/app")(app);
+
 // require("./sandbox/websites/model/test.model.server")(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
